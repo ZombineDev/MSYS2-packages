@@ -1,8 +1,8 @@
 # Maintainer: Masanori Shirayama <mashir43@gmail.com>
 
-pkgname=fish
-pkgver=3.0.0
-pkgrel=2
+pkgname=fish-shell
+pkgver=b23403ee6b52ac8652d55d8d90c98eafd9a030ed
+pkgrel=1
 epoch=
 pkgdesc="a smart and user-friendly command line shell"
 arch=('i686' 'x86_64')
@@ -13,13 +13,12 @@ depends=('bc' 'gcc-libs' 'gettext' 'libiconv' 'libpcre2_16' 'man-db' 'ncurses')
 makedepends=('doxygen' 'gcc' 'gettext-devel' 'intltool' 'libiconv-devel' 'ncurses-devel' 'pcre2-devel')
 optdepends=('python: for manual page completion parser and web configuration tool')
 install=fish.install
-source=("https://github.com/fish-shell/fish-shell/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz"{,.asc}
+source=("https://github.com/fish-shell/fish-shell/archive/${pkgver}.tar.gz"
         01-msysize.patch
         config.fish
         msys2.fish
         perlbin.fish)
-sha256sums=('ea9dd3614bb0346829ce7319437c6a93e3e1dfde3b7f6a469b543b0d2c68f2cf'
-            'SKIP'
+sha256sums=('377fe35c986b425feef54001f101b12f5b17c8cab9841c2504407393eab30e4b'
             '1e2743177c499e890d681be685fed6f849e42cb282e13b4e56324169a43bd987'
             '983c3273e0249957ed6c40785e005739da30f31d4f029383f257f9990d38811a'
             '0d01a03280347bce3499a603e18f4de9b2a61709b0c50595bfb58ecb335c63f3'
@@ -28,6 +27,7 @@ validpgpkeys=('003837986104878835FA516D7A67D962D88A709A')
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
+  echo "3.0.0" > version
   patch -p1 -i ${srcdir}/01-msysize.patch
   autoreconf -ivf
 }
